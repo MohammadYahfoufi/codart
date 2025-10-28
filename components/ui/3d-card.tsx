@@ -72,9 +72,10 @@ export const CardItem = ({
   className?: string;
   [key: string]: any;
 }) => {
+  const MotionComponent = motion(Component);
+  
   return (
-    <motion.div
-      as={Component}
+    <MotionComponent
       className={className}
       style={{
         transform: `translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
@@ -82,6 +83,6 @@ export const CardItem = ({
       {...props}
     >
       {children}
-    </motion.div>
+    </MotionComponent>
   );
 };
