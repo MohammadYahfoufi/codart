@@ -11,13 +11,9 @@ export const Encryption = () => {
       <div className="absolute w-auto h-auto top-0 z-[5]">
         <motion.div
           variants={slideInFromTop}
-          className="text-[40px] font-medium text-center text-gray-200"
+          className="text-[40px] font-medium text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500"
         >
-          Performance{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-            &
-          </span>{" "}
-          security.
+          Performance & security.
         </motion.div>
       </div>
 
@@ -42,7 +38,7 @@ export const Encryption = () => {
       </div>
 
       <div className="absolute z-[20] bottom-[10px] px-[5px]">
-        <div className="text-[20px] font-semibold text-center text-gray-200 tracking-wide">
+        <div className="text-[20px] font-semibold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 tracking-wide">
           Secure your data with end-to-end encryption.
         </div>
       </div>

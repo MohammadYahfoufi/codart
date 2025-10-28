@@ -15,7 +15,7 @@ export const SkillText = () => {
 
       <motion.div
         variants={slideInFromLeft(0.5)}
-        className="text-[30px] text-white font-medium mt-[10px] text-center mb-[15px]"
+        className="text-[30px] text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 font-medium mt-[10px] text-center mb-[15px]"
       >
         Making apps with modern technologies.
       </motion.div>

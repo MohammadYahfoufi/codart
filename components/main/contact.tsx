@@ -82,7 +82,7 @@ export const Contact = () => {
             <p className="text-[#b49bff] text-sm uppercase tracking-wider">
               GET IN TOUCH
             </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-white">
+            <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
               Contact.
             </h2>
             <p className="text-[18px] font-medium text-gray-300 tracking-wide">
