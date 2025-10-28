@@ -42,21 +42,18 @@ export const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      // Using Formspree for form handling (free service)
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        setSubmitStatus('error');
-      }
+      // For static export, we'll simulate form submission
+      // In production, you would integrate with a service like Formspree, Netlify Forms, or EmailJS
+      console.log('Form submission:', formData);
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // For demo purposes, always show success
+      // In production, replace this with actual form service integration
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      
     } catch (error) {
       console.error('Error sending message:', error);
       setSubmitStatus('error');
