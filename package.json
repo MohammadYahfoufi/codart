@@ -9,11 +9,6 @@
     "lint": "next lint",
     "deploy": "gh-pages -d out"
   },
-  "author": {
-    "name": "Sanidhya Kumar Verma",
-    "email": "sanidhya.verma12345@gmail.com",
-    "url": "https://github.com/sanidhyy"
-  },
   "description": "Welcome to my full stack Next.js 14 space portfolio.",
   "keywords": [
     "reactjs",
