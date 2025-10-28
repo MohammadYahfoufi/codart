@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, OrbitControls } from "@react-three/drei";
+import { useState } from "react";
 
 // 3D Model Component
 const PlanetModel = () => {
@@ -20,6 +21,49 @@ const PlanetModel = () => {
 };
 
 export const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -75,7 +119,7 @@ export const Contact = () => {
             </div>
           </div>
 
-          <form className="flex flex-col gap-4">
+                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-gray-300 text-sm">
                 Your Name
@@ -83,8 +127,12 @@ export const Contact = () => {
               <input
                 type="text"
                 id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 placeholder="What's your name?"
                 className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
+                required
               />
             </div>
 
@@ -95,8 +143,12 @@ export const Contact = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
                 placeholder="What's your email?"
                 className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
+                required
               />
             </div>
 
@@ -106,19 +158,46 @@ export const Contact = () => {
               </label>
               <textarea
                 id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
                 placeholder="What do you want to say?"
                 rows={4}
                 className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors resize-none"
+                required
               />
             </div>
 
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full py-3 px-6 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold rounded-lg hover:from-purple-600 hover:to-cyan-600 transition-all duration-300"
+              type="submit"
+              disabled={isSubmitting}
+              whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
+              whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
+              className={`w-full py-3 px-6 font-semibold rounded-lg transition-all duration-300 ${
+                isSubmitting
+                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                  : 'bg-gradient-to-r from-purple-500 to-cyan-500 text-white hover:from-purple-600 hover:to-cyan-600'
+              }`}
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
+            
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="p-4 bg-green-900/20 border border-green-500/50 rounded-lg">
+                <p className="text-green-400 text-center">
+                  ✅ Message sent successfully! I&apos;ll get back to you soon.
+                </p>
+              </div>
+            )}
+            
+            {submitStatus === 'error' && (
+              <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
+                <p className="text-red-400 text-center">
+                  ❌ Failed to send message. Please try again or contact me directly.
+                </p>
+              </div>
+            )}
             
             <p className="text-center text-sm text-gray-500">
               ⚡ I typically respond within 24 hours
