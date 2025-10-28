@@ -42,7 +42,8 @@ export const Contact = () => {
     setSubmitStatus('idle');
 
     try {
-      const response = await fetch('/api/contact', {
+      // Using Formspree for form handling (free service)
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -119,7 +120,7 @@ export const Contact = () => {
             </div>
           </div>
 
-                  <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label htmlFor="name" className="text-gray-300 text-sm">
                 Your Name
@@ -131,8 +132,8 @@ export const Contact = () => {
                 value={formData.name}
                 onChange={handleChange}
                 placeholder="What's your name?"
-                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
                 required
+                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
               />
             </div>
 
@@ -147,8 +148,8 @@ export const Contact = () => {
                 value={formData.email}
                 onChange={handleChange}
                 placeholder="What's your email?"
-                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
                 required
+                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors"
               />
             </div>
 
@@ -163,10 +164,22 @@ export const Contact = () => {
                 onChange={handleChange}
                 placeholder="What do you want to say?"
                 rows={4}
-                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors resize-none"
                 required
+                className="w-full px-4 py-3 bg-[#1a1a2e] border border-[#7042f88b] rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-[#b49bff] transition-colors resize-none"
               />
             </div>
+
+            {/* Status Messages */}
+            {submitStatus === 'success' && (
+              <div className="p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">
+                ✅ Message sent successfully! I&apos;ll get back to you soon.
+              </div>
+            )}
+            {submitStatus === 'error' && (
+              <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">
+                ❌ Failed to send message. Please try again.
+              </div>
+            )}
 
             <motion.button
               type="submit"
@@ -181,23 +194,6 @@ export const Contact = () => {
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
-            
-            {/* Status Messages */}
-            {submitStatus === 'success' && (
-              <div className="p-4 bg-green-900/20 border border-green-500/50 rounded-lg">
-                <p className="text-green-400 text-center">
-                  ✅ Message sent successfully! I&apos;ll get back to you soon.
-                </p>
-              </div>
-            )}
-            
-            {submitStatus === 'error' && (
-              <div className="p-4 bg-red-900/20 border border-red-500/50 rounded-lg">
-                <p className="text-red-400 text-center">
-                  ❌ Failed to send message. Please try again or contact me directly.
-                </p>
-              </div>
-            )}
             
             <p className="text-center text-sm text-gray-500">
               ⚡ I typically respond within 24 hours
