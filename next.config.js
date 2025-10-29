@@ -3,11 +3,11 @@ const nextConfig = {
   output: 'export',
   trailingSlash: true,
   images: {
-    unoptimized: true
+    unoptimized: true,
   },
   distDir: 'out',
   skipTrailingSlashRedirect: true,
-  skipMiddlewareUrlNormalize: true
-}
+  skipMiddlewareUrlNormalize: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;

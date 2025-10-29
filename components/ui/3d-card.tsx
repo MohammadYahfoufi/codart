@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 export const CardContainer = ({
   children,
@@ -12,12 +12,7 @@ export const CardContainer = ({
   className?: string;
 }) => {
   return (
-    <div
-      className={cn(
-        "relative group/card w-full h-full",
-        className
-      )}
-    >
+    <div className={cn('relative group/card w-full h-full', className)}>
       {children}
     </div>
   );
@@ -33,13 +28,13 @@ export const CardBody = ({
   return (
     <motion.div
       className={cn(
-        "relative group/card w-full h-full rounded-xl p-6 border transition-all duration-300",
-        "bg-[#1a1a2e] border-[#7042f88b] hover:border-[#b49bff]",
-        "hover:shadow-2xl hover:shadow-purple-500/20",
-        className
+        'relative group/card w-full h-full rounded-xl p-6 border transition-all duration-300',
+        'bg-[#1a1a2e] border-[#7042f88b] hover:border-[#b49bff]',
+        'hover:shadow-2xl hover:shadow-purple-500/20',
+        className,
       )}
       style={{
-        transformStyle: "preserve-3d",
+        transformStyle: 'preserve-3d',
       }}
       whileHover={{
         y: -10,
@@ -47,7 +42,7 @@ export const CardBody = ({
       }}
       transition={{
         duration: 0.3,
-        ease: "easeOut",
+        ease: 'easeOut',
       }}
     >
       {children}
@@ -56,7 +51,7 @@ export const CardBody = ({
 };
 
 export const CardItem = ({
-  as: Component = "div",
+  as: Component = 'div',
   children,
   translateZ = 0,
   rotateX = 0,
@@ -73,7 +68,7 @@ export const CardItem = ({
   [key: string]: any;
 }) => {
   const MotionComponent = motion(Component);
-  
+
   return (
     <MotionComponent
       className={className}

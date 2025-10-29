@@ -28,17 +28,20 @@ Visit the live site: [https://mohammadyahfoufi.github.io/codart](https://mohamma
 ## 📦 Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/MohammadYahfoufi/codart.git
 cd codart
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -58,11 +61,13 @@ This project is configured for GitHub Pages deployment using GitHub Actions.
 ### Manual Deployment
 
 1. Build the project:
+
 ```bash
 npm run build
 ```
 
 2. Deploy to GitHub Pages:
+
 ```bash
 npm run deploy
 ```

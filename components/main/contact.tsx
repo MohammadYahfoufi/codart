@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
-import { Canvas } from "@react-three/fiber";
-import { useGLTF, OrbitControls } from "@react-three/drei";
-import { useState } from "react";
+import { motion } from 'framer-motion';
+import { slideInFromLeft, slideInFromRight } from '@/lib/motion';
+import { Canvas } from '@react-three/fiber';
+import { useGLTF, OrbitControls } from '@react-three/drei';
+import { FormEvent, useState } from 'react';
 
 // 3D Model Component
 const PlanetModel = () => {
-  const { scene } = useGLTF("/stylized_planet.glb");
-  
+  const { scene } = useGLTF('/stylized_planet.glb');
+
   return (
-    <primitive 
-      object={scene} 
-      scale={[2, 2, 2]} 
+    <primitive
+      object={scene}
+      scale={[2, 2, 2]}
       position={[0, 0, 0]}
       rotation={[0, 0, 0]}
     />
@@ -24,38 +24,40 @@ export const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [submitStatus, setSubmitStatus] = useState<
+    'idle' | 'success' | 'error'
+  >('idle');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      // For static export, we'll simulate form submission
-      // In production, you would integrate with a service like Formspree, Netlify Forms, or EmailJS
-      console.log('Form submission:', formData);
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For demo purposes, always show success
-      // In production, replace this with actual form service integration
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error();
+
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
-      
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error(error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -86,7 +88,8 @@ export const Contact = () => {
               Contact.
             </h2>
             <p className="text-[18px] font-medium text-gray-300 tracking-wide">
-              Ready to start your next project? Let&apos;s discuss how I can help bring your ideas to life.
+              Ready to start your next project? Let&apos;s discuss how I can
+              help bring your ideas to life.
             </p>
           </div>
 
@@ -94,8 +97,18 @@ export const Contact = () => {
           <div className="flex flex-col sm:flex-row gap-4 mb-6">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg">
-                <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                <svg
+                  className="h-5 w-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                  />
                 </svg>
               </div>
               <div>
@@ -105,9 +118,24 @@ export const Contact = () => {
             </div>
             <div className="flex items-center gap-3">
               <div className="p-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg">
-                <svg className="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                <svg
+                  className="h-5 w-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                  />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
                 </svg>
               </div>
               <div>
@@ -191,7 +219,7 @@ export const Contact = () => {
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
-            
+
             <p className="text-center text-sm text-gray-500">
               ⚡ I typically respond within 24 hours
             </p>
@@ -210,9 +238,13 @@ export const Contact = () => {
             >
               <ambientLight intensity={0.5} />
               <directionalLight position={[10, 10, 5]} intensity={1} />
-              <pointLight position={[-10, -10, -5]} intensity={0.5} color="#b49bff" />
+              <pointLight
+                position={[-10, -10, -5]}
+                intensity={0.5}
+                color="#b49bff"
+              />
               <PlanetModel />
-              <OrbitControls 
+              <OrbitControls
                 enableZoom={false}
                 enablePan={false}
                 enableRotate={true}
