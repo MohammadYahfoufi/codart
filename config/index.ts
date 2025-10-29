@@ -38,4 +38,14 @@ export const siteConfig: Metadata = {
     name: 'Mohammad Yahfoufi',
     url: 'https://github.com/MohammadYahfoufi',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.png', type: 'image/png' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 } as const;
