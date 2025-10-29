@@ -2,13 +2,11 @@ import type { Metadata } from 'next';
 
 export const siteConfig: Metadata = {
   title: 'Codart',
-  description: 'Welcome to my full stack Next.js 14 space portfolio.',
-  keywords: [
+  description: 'Codart merges art, code, and innovation — delivering on-time digital experiences that inspire and perform.',  keywords: [
     'reactjs',
     'nextjs',
     'vercel',
     'react',
-    'space-portfolio',
     'portfolio',
     'react-icons',
     'cn',
