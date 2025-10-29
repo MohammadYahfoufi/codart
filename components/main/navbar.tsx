@@ -1,9 +1,9 @@
 'use client';
-import { useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
-import { NAV_LINKS, SOCIALS } from "@/constants";
+import { NAV_LINKS, SOCIALS } from '@/constants';
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -13,10 +13,7 @@ export const Navbar = () => {
       {/* Navbar Container */}
       <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
         {/* Logo + Name */}
-        <Link
-          href="#about-me"
-          className="flex items-center"
-        >
+        <Link href="#about-me" className="flex items-center">
           <Image
             src="/codart1.png"
             alt="Codart Logo"
@@ -39,7 +36,6 @@ export const Navbar = () => {
                 {link.title}
               </Link>
             ))}
-
           </div>
         </div>
 

@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { useInView } from "react-intersection-observer";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { useInView } from 'react-intersection-observer';
 
 type SkillDataProviderProps = {
   src: string;
@@ -35,7 +35,7 @@ export const SkillDataProvider = ({
       ref={ref}
       initial="hidden"
       variants={imageVariants}
-      animate={inView ? "visible" : "hidden"}
+      animate={inView ? 'visible' : 'hidden'}
       custom={index}
       transition={{ delay: index * animationDelay }}
     >

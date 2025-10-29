@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
-import { slideInFromTop } from "@/lib/motion";
+import { slideInFromTop } from '@/lib/motion';
 
 export const Encryption = () => {
   return (
@@ -34,7 +34,6 @@ export const Encryption = () => {
             className="z-10"
           />
         </div>
-
       </div>
 
       <div className="absolute z-[20] bottom-[10px] px-[5px]">
