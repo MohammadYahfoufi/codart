@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { slideInFromLeft, slideInFromRight } from '@/lib/motion';
 import { Canvas } from '@react-three/fiber';
 import { useGLTF, OrbitControls } from '@react-three/drei';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
 // 3D Model Component
 const PlanetModel = () => {
@@ -40,21 +40,24 @@ export const Contact = () => {
     });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
 
     try {
-      console.log('Form submission:', formData);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (!res.ok) throw new Error();
 
       setSubmitStatus('success');
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
-      console.error('Error sending message:', error);
+      console.error(error);
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
