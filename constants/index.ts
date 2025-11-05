@@ -229,11 +229,11 @@ export const PROJECTS = [
     link: 'https://graphicspotci.com/',
   },
   {
-    title: 'Modern Next.js 14 Portfolio',
+    title: 'ShopCodart — Tech Shop Ecommerce',
     description:
-      'Embark on a journey through my professional evolution with the "Modern Next.js Portfolio" - a dynamic showcase of my skills, experiences, and passion for web development. Crafted with precision and powered by Next.js, this portfolio is more than just a static display; it\'s an immersive experience that reflects the cutting edge of modern web technologies.',
+      'A modern and fully-featured ecommerce platform for a tech shop, built with cutting-edge web technologies. ShopCodart offers a seamless shopping experience with intuitive navigation, secure checkout, product management, and responsive design. The platform features advanced search functionality, shopping cart, user authentication, and admin dashboard for managing products and orders.',
     image: '/projects/project-2.png',
-    link: 'https://example.com',
+    link: 'https://shopcodart.vercel.app',
   },
   {
     title: 'Interactive Cards Portfolio',
