@@ -8,6 +8,7 @@ import { NAV_LINKS, SOCIALS } from "@/constants";
 
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
     <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-10">
@@ -26,15 +27,37 @@ export const Navbar = () => {
         </Link>
 
         {/* Web Navbar */}
-        <div className="hidden md:flex w-[500px] h-full flex-row items-center justify-between md:mr-20">
-          <div className="flex items-center justify-between w-full h-auto border-[rgba(112,66,248,0.38)] bg-[rgba(3,0,20,0.37)] mr-[15px] px-[20px] py-[10px] rounded-full text-gray-200">
+        <div className="hidden md:flex w-[520px] h-full flex-row items-center justify-between md:mr-20">
+          <div className="flex items-center justify-center gap-3 w-full h-auto border-[rgba(112,66,248,0.38)] bg-[rgba(3,0,20,0.37)] mr-[15px] px-[18px] py-[6px] rounded-full text-gray-200">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.title}
                 href={link.link}
-                className="cursor-pointer hover:text-[rgb(112,66,248)] transition"
+                className="relative flex items-center justify-center px-3.5 py-1.5 text-sm font-medium tracking-wide text-gray-200 cursor-pointer transition-colors duration-300 rounded-full overflow-hidden whitespace-nowrap group"
+                onMouseEnter={() => setHoveredLink(link.title)}
+                onMouseLeave={() => setHoveredLink(null)}
+                onFocus={() => setHoveredLink(link.title)}
+                onBlur={() => setHoveredLink(null)}
               >
-                {link.title}
+                <AnimatePresence>
+                  {hoveredLink === link.title && (
+                    <motion.span
+                      layoutId="nav-hover"
+                      className="absolute inset-[2px] rounded-full bg-[radial-gradient(75%_150%_at_50%_-25%,rgba(255,255,255,0.35)_0%,rgba(112,66,248,0.55)_45%,rgba(21,162,255,0.65)_100%)] shadow-[0_0_20px_rgba(112,66,248,0.35)]"
+                      initial={{ opacity: 0, scale: 0.85 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                    />
+                  )}
+                </AnimatePresence>
+                <motion.span
+                  className="relative z-10 px-3 py-2"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 28 }}
+                >
+                  {link.title}
+                </motion.span>
               </Link>
             ))}
           </div>
