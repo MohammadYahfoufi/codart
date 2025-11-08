@@ -244,7 +244,7 @@ export const Contact = () => {
             </motion.button>
 
             <p className="text-center text-sm text-gray-500">
-              ⚡ I typically respond within 24 hours
+              ⚡ We typically respond within 24 hours
             </p>
           </form>
         </motion.div>
