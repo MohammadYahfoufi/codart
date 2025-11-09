@@ -74,7 +74,7 @@ export const SOCIALS = [
   {
     name: 'Instagram',
     icon: RxInstagramLogo,
-    link: 'https://instagram.com',
+    link: 'https://www.instagram.com/codartlb/',
   },
   {
     name: 'Facebook',
@@ -271,7 +271,7 @@ export const FOOTER_DATA = [
       {
         name: 'Instagram',
         icon: RxInstagramLogo,
-        link: 'https://instagram.com',
+        link: 'https://www.instagram.com/codartlb/',
       },
       {
         name: 'Twitter',
