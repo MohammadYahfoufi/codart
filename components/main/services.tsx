@@ -91,7 +91,7 @@ export const Services = () => {
           variants={slideInFromTop}
           className="flex flex-col items-center text-center mb-16"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-rose-500 to-indigo-500 drop-shadow-[0_0_25px_rgba(244,114,182,0.35)] mb-4">
             My Services
           </h2>
           <p className="text-[18px] font-medium text-gray-300 max-w-2xl tracking-wide">

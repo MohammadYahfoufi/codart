@@ -30,6 +30,7 @@ export const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState<
     'idle' | 'success' | 'error'
   >('idle');
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -38,12 +39,18 @@ export const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+
+    if (submitStatus !== 'idle') {
+      setSubmitStatus('idle');
+      setStatusMessage(null);
+    }
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setStatusMessage(null);
 
     try {
       const res = await fetch('/api/contact', {
@@ -55,10 +62,14 @@ export const Contact = () => {
       if (!res.ok) throw new Error();
 
       setSubmitStatus('success');
+      setStatusMessage(
+        "✅ Message sent successfully! I'll get back to you soon.",
+      );
       setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error(error);
       setSubmitStatus('error');
+      setStatusMessage('❌ Failed to send message. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -195,14 +206,26 @@ export const Contact = () => {
             </div>
 
             {/* Status Messages */}
-            {submitStatus === 'success' && (
-              <div className="p-3 bg-green-500/20 border border-green-500/50 rounded-lg text-green-400 text-sm">
-                ✅ Message sent successfully! I&apos;ll get back to you soon.
-              </div>
-            )}
-            {submitStatus === 'error' && (
-              <div className="p-3 bg-red-500/20 border border-red-500/50 rounded-lg text-red-400 text-sm">
-                ❌ Failed to send message. Please try again.
+            {submitStatus !== 'idle' && statusMessage && (
+              <div
+                className={`flex items-start justify-between gap-3 p-3 rounded-lg text-sm ${
+                  submitStatus === 'success'
+                    ? 'bg-green-500/20 border border-green-500/50 text-green-400'
+                    : 'bg-red-500/20 border border-red-500/50 text-red-400'
+                }`}
+              >
+                <span>{statusMessage}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSubmitStatus('idle');
+                    setStatusMessage(null);
+                  }}
+                  aria-label="Dismiss message"
+                  className="text-current hover:opacity-80 transition-opacity"
+                >
+                  ✕
+                </button>
               </div>
             )}
 

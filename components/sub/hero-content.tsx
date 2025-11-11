@@ -20,14 +20,13 @@ export const HeroContent = () => {
       <div className="h-full w-full flex flex-col gap-5 justify-center m-auto text-start">
         <motion.div
           variants={slideInFromLeft(0.5)}
-          className="flex flex-col gap-6 mt-6 text-6xl text-bold text-white max-w-[600px] w-auto h-auto"
+          className="relative flex flex-col gap-6 mt-6 text-6xl font-bold text-white max-w-[700px] w-auto h-auto leading-tight"
         >
-          <span>
-            Providing{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
-              the best
-            </span>{' '}
-            project experience.
+          <span className="relative inline-block">
+            <span className="absolute inset-0 blur-3xl opacity-60 bg-gradient-conic from-cyan-400 via-violet-500 via-rose-500 to-cyan-400 -z-10" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-violet-400 to-rose-300 drop-shadow-[0_0_30px_rgba(63,131,248,0.35)]">
+              Delivering the best project experiences.
+            </span>
           </span>
         </motion.div>
 
@@ -35,9 +34,9 @@ export const HeroContent = () => {
           variants={slideInFromLeft(0.8)}
           className="text-[18px] font-medium text-gray-300 my-5 max-w-[600px] tracking-wide"
         >
-          I&apos;m a Full Stack Software Engineer specializing in modern web
-          applications, mobile apps, and custom software solutions. Let&apos;s
-          build something amazing together!
+          We&apos;re a full-stack product team crafting modern web platforms,
+          mobile experiences, and custom software that scale. Partner with us to
+          build something extraordinary together.
         </motion.p>
 
         <motion.div
@@ -50,7 +49,7 @@ export const HeroContent = () => {
             whileTap={{ scale: 0.95 }}
             className="py-3 px-8 bg-gradient-to-r from-purple-500 to-cyan-500 text-white font-semibold rounded-lg text-center cursor-pointer hover:from-purple-600 hover:to-cyan-600 transition-all duration-300"
           >
-            Hire Me Now
+            Start a Project
           </motion.a>
           <motion.a
             href="#projects"
@@ -58,7 +57,7 @@ export const HeroContent = () => {
             whileTap={{ scale: 0.95 }}
             className="py-3 px-8 border-2 border-[#7042f88b] text-white font-semibold rounded-lg text-center cursor-pointer hover:bg-[#7042f88b] transition-all duration-300"
           >
-            View My Work
+            See Our Work
           </motion.a>
         </motion.div>
       </div>
