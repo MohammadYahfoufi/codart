@@ -606,6 +606,11 @@
   dependencies:
     promise-worker-transferable "^1.0.4"
 
+"@netlify/plugin-nextjs@^5.14.5":
+  version "5.14.5"
+  resolved "https://registry.npmjs.org/@netlify/plugin-nextjs/-/plugin-nextjs-5.14.5.tgz"
+  integrity sha512-AEt6p33YoZGnS4oV1oJnQZiMhzVptZJF7MyxygXrIuR0H0o72GBVIyn3/k1pyNtmWYyWL7WjZLLmR0aYt/OYqg==
+
 "@next/env@14.2.33":
   version "14.2.33"
   resolved "https://registry.npmjs.org/@next/env/-/env-14.2.33.tgz"
