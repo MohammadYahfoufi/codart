@@ -78,7 +78,7 @@ export const Services = () => {
   return (
     <section
       id="services"
-      className="flex flex-col items-center justify-center py-20 px-10"
+      className="flex flex-col items-center justify-center py-16 sm:py-20 px-6 sm:px-8 lg:px-10"
     >
       <motion.div
         initial="hidden"
@@ -89,12 +89,12 @@ export const Services = () => {
         {/* Header */}
         <motion.div
           variants={slideInFromTop}
-          className="flex flex-col items-center text-center mb-16"
+          className="flex flex-col items-center text-center mb-12 sm:mb-16 px-2"
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500 mb-4">
             My Services
           </h2>
-          <p className="text-[18px] font-medium text-gray-300 max-w-2xl tracking-wide">
+          <p className="text-base sm:text-lg font-medium text-gray-300 max-w-2xl tracking-wide">
             I provide comprehensive development services to bring your ideas to
             life. From concept to deployment, I&apos;m here to help you succeed.
           </p>
@@ -105,7 +105,7 @@ export const Services = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full"
         >
           {services.map((service, index) => (
             <motion.div

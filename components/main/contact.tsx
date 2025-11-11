@@ -78,13 +78,13 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center py-20 px-10"
+      className="flex flex-col items-center justify-center py-16 sm:py-20 px-6 sm:px-8 lg:px-10"
     >
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
-        className="flex flex-col lg:flex-row items-center justify-center gap-10 w-full max-w-6xl"
+        className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-10 w-full max-w-6xl"
       >
         {/* Contact Form */}
         <motion.div
@@ -95,18 +95,18 @@ export const Contact = () => {
             <p className="text-[#b49bff] text-sm uppercase tracking-wider">
               GET IN TOUCH
             </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-cyan-500">
               Contact.
             </h2>
-            <p className="text-[18px] font-medium text-gray-300 tracking-wide">
+            <p className="text-base sm:text-lg font-medium text-gray-300 tracking-wide">
               Ready to start your next project? Let&apos;s discuss how I can
               help bring your ideas to life.
             </p>
           </div>
 
           {/* Contact Info */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full">
+            <div className="flex items-center gap-3 w-full sm:w-1/2 bg-[#1a1a2e]/40 sm:bg-transparent px-4 sm:px-0 py-3 sm:py-0 rounded-xl sm:rounded-none">
               <div className="p-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg">
                 <svg
                   className="h-5 w-5 text-white"
@@ -123,11 +123,14 @@ export const Contact = () => {
                 </svg>
               </div>
               <div>
-                <p className="text-sm text-gray-400">Email</p>
-                <p className="text-white font-semibold">contact@codart.dev</p>
+                <p className="text-xs sm:text-sm text-gray-400">Email</p>
+                <p className="text-white font-semibold text-sm sm:text-base">
+                  contact@codart.dev
+                </p>
               </div>
             </div>
-            <div className="flex items-center gap-3">
+
+            <div className="flex items-center gap-3 w-full sm:w-1/2 bg-[#1a1a2e]/40 sm:bg-transparent px-4 sm:px-0 py-3 sm:py-0 rounded-xl sm:rounded-none">
               <div className="p-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg">
                 <svg
                   className="h-5 w-5 text-white"
@@ -150,8 +153,10 @@ export const Contact = () => {
                 </svg>
               </div>
               <div>
-                <p className="text-sm text-gray-400">Location</p>
-                <p className="text-white font-semibold">Available Worldwide</p>
+                <p className="text-xs sm:text-sm text-gray-400">Location</p>
+                <p className="text-white font-semibold text-sm sm:text-base">
+                  Available Worldwide
+                </p>
               </div>
             </div>
           </div>
@@ -254,7 +259,7 @@ export const Contact = () => {
           variants={slideInFromRight(0.5)}
           className="w-full lg:w-1/2 flex justify-center items-center"
         >
-          <div className="w-96 h-96 lg:w-[500px] lg:h-[500px]">
+          <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-[31rem] lg:h-[31rem]">
             <Canvas
               camera={{ position: [0, 0, 5], fov: 50 }}
               style={{ background: 'transparent' }}

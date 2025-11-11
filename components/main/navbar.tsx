@@ -11,9 +11,9 @@ export const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-10">
+    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 sm:px-6 lg:px-10">
       {/* Navbar Container */}
-      <div className="w-full h-full flex items-center justify-between m-auto px-[10px]">
+      <div className="w-full h-full flex items-center justify-between m-auto px-3 sm:px-4 md:px-[10px]">
         {/* Logo + Name */}
         <Link href="#about-me" className="flex items-center">
           <Image
@@ -22,13 +22,14 @@ export const Navbar = () => {
             width={90}
             height={90}
             draggable={false}
-            className="cursor-pointer"
+            sizes="(max-width: 768px) 40vw, 90px"
+            className="cursor-pointer w-12 h-12 sm:w-16 sm:h-16 md:w-[90px] md:h-[90px]"
           />
         </Link>
 
         {/* Web Navbar */}
-        <div className="hidden md:flex w-[520px] h-full flex-row items-center justify-between md:mr-20">
-          <div className="flex items-center justify-center gap-3 w-full h-auto border-[rgba(112,66,248,0.38)] bg-[rgba(3,0,20,0.37)] mr-[15px] px-[18px] py-[6px] rounded-full text-gray-200">
+        <div className="hidden md:flex md:w-[32.5rem] h-full flex-row items-center justify-between md:mr-10 lg:mr-20">
+          <div className="flex items-center justify-center gap-3 w-full h-auto border-[rgba(112,66,248,0.38)] bg-[rgba(3,0,20,0.37)] mr-2 lg:mr-[15px] px-4 lg:px-5 py-1.5 rounded-full text-gray-200">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.title}
@@ -64,7 +65,7 @@ export const Navbar = () => {
         </div>
 
         {/* Social Icons (Web) */}
-        <div className="hidden md:flex flex-row gap-5">
+        <div className="hidden md:flex flex-row gap-4 lg:gap-5">
           {SOCIALS.map(({ link, name, icon: Icon }) => (
             <Link
               href={link}
