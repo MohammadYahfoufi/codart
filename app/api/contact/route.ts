@@ -1,99 +1,86 @@
-import { NextResponse } from 'next/server';
+// app/api/send-email/route.ts
+import { NextResponse } from "next/server";
+import { brevo } from "@/lib/brevo";
+import type * as Brevo from "@getbrevo/brevo";
 
-const BREVO_API_KEY = process.env.BREVO_API_KEY;
-const BREVO_SENDER_EMAIL =
-  process.env.BREVO_SENDER_EMAIL ?? 'yahfoufim91@gmail.com';
-const BREVO_SENDER_NAME =
-  process.env.BREVO_SENDER_NAME ?? 'Codart Shop';
-const BREVO_RECIPIENT_EMAIL =
-  process.env.BREVO_RECIPIENT_EMAIL ?? 'yahfoufim91@gmail.com';
-const BREVO_API_URL =
-  process.env.BREVO_API_URL ?? 'https://api.brevo.com/v3/smtp/email';
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic"; // avoid caching
+
+function isEmail(x: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x);
+}
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
-
-    if (!name || !email || !message) {
-      return NextResponse.json(
-        { status: 'error', message: 'Missing required fields' },
-        { status: 400 },
-      );
+    // Robust JSON parse
+    let body: any;
+    try {
+      body = await req.json();
+    } catch {
+      return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
     }
 
-    if (!BREVO_API_KEY || !BREVO_SENDER_EMAIL || !BREVO_RECIPIENT_EMAIL) {
-      console.error('Brevo configuration is missing. Check environment variables.');
+    const { email, message, subject, name } = body || {};
+
+    if (!email || !message) {
       return NextResponse.json(
-        { status: 'error', message: 'Email service is not configured.' },
-        { status: 500 },
+        { error: "email and message are required" },
+        { status: 400 }
       );
     }
+    if (!isEmail(email)) {
+      return NextResponse.json({ error: "invalid email" }, { status: 400 });
+    }
 
-    const subject = `New contact request from ${name}`;
-    const htmlContent = `
-      <html>
-        <body style="font-family: Arial, sans-serif; line-height: 1.5; color: #1a1a2e;">
-          <h2>New Contact Message</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, '<br />')}</p>
-        </body>
-      </html>
-    `;
+    // ✨ Send the email TO YOU (owner/admin), not to the visitor
+    const ownerEmail = process.env.CONTACT_INBOX ?? process.env.BREVO_SENDER_EMAIL!;
+    const ownerName = process.env.CONTACT_INBOX_NAME ?? (process.env.BREVO_SENDER_NAME || "CODART");
 
-    const textContent = `New message from ${name} (${email}):\n\n${message}`;
 
-    const brevoResponse = await fetch(BREVO_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        accept: 'application/json',
-        'api-key': BREVO_API_KEY,
+    const sendSmtpEmail: Brevo.SendSmtpEmail = {
+      to: [{ email: ownerEmail, name: ownerName }],          // <-- you receive it
+      sender: {
+        email: process.env.BREVO_SENDER_EMAIL!,              // verified sender in Brevo
+        name: process.env.BREVO_SENDER_NAME || "CODART",
       },
-      body: JSON.stringify({
-        sender: {
-          email: BREVO_SENDER_EMAIL,
-          name: BREVO_SENDER_NAME,
-        },
-        to: [
-          {
-            email: BREVO_RECIPIENT_EMAIL,
-            name: BREVO_SENDER_NAME,
-          },
-        ],
-        replyTo: {
-          email,
-          name,
-        },
-        subject,
-        textContent,
-        htmlContent,
-        tags: ['portfolio-contact'],
-      }),
-    });
-
-    if (!brevoResponse.ok) {
-      const errorText = await brevoResponse.text();
-      console.error('Brevo API error:', brevoResponse.status, errorText);
-      return NextResponse.json(
-        {
-          status: 'error',
-          message: 'Failed to send message. Please try again later.',
-        },
-        { status: 502 },
-      );
-    }
-
-    return NextResponse.json({ status: 'success' });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json(
-      {
-        status: 'error',
-        message: 'Unexpected server error. Please try again later.',
+      replyTo: { email, name: name || undefined },           // <-- hitting Reply goes to the visitor
+      subject: subject || "New contact form message",
+      templateId: 1,                                         // your Brevo template ID
+      params: {
+        MESSAGE_BODY: message,
+        USER_EMAIL: email,
+        USER_NAME: name || "",
+        COMPANY_NAME: "CODART",
+        SUPPORT_EMAIL: "support@codart.com",
+        LOGO_URL: "https://codart.vercel.app/codart1.png",
+        // SUBJECT: subject || "New contact form message",   // if your template uses {{ params.SUBJECT }}
       },
-      { status: 500 },
-    );
+      // Optional: also cc yourself/teammates, or bcc for archives
+      // cc: [{ email: "teammate@codart.dev" }],
+      // bcc: [{ email: "archive@codart.dev" }],
+      // tags: ["contact-form"],
+    };
+
+    const result = await brevo.sendTransacEmail(sendSmtpEmail);
+    const messageId =
+      (result as any)?.messageId ||
+      (result as any)?.body?.messageId ||
+      null;
+
+    return NextResponse.json({ ok: true, messageId }, { status: 200 });
+  } catch (err: any) {
+    // Brevo errors often hide under response.body or response.text
+    const detail =
+      err?.response?.text ||
+      err?.response?.body?.message ||
+      err?.message ||
+      "Unknown error";
+    console.error("Brevo send error:", detail);
+    return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
   }
+}
+
+// (Optional) reject other methods:
+export async function GET() {
+  return NextResponse.json({ error: "Method not allowed" }, { status: 405 });
 }

@@ -46,34 +46,44 @@ export const Contact = () => {
     }
   };
 
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitStatus('idle');
+    setSubmitStatus("idle");
     setStatusMessage(null);
 
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      const payload = {
+        email: formData.email,
+        message: formData.message,
+        subject: `New message from ${formData.name || "CODART Contact Form"}`,
+      };
+
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
       });
 
-      if (!res.ok) throw new Error();
+      const data = await res.json();
 
-      setSubmitStatus('success');
-      setStatusMessage(
-        "✅ Message sent successfully! I'll get back to you soon.",
-      );
-      setFormData({ name: '', email: '', message: '' });
+      if (!res.ok) {
+        throw new Error(data?.error || "Failed to send email");
+      }
+
+      setSubmitStatus("success");
+      setStatusMessage("✅ Message sent successfully! I'll get back to you soon.");
+      setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error(error);
-      setSubmitStatus('error');
-      setStatusMessage('❌ Failed to send message. Please try again.');
+      console.error("Error submitting form:", error);
+      setSubmitStatus("error");
+      setStatusMessage("❌ Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
+
 
   return (
     <section
@@ -213,11 +223,10 @@ export const Contact = () => {
             {/* Status Messages */}
             {submitStatus !== 'idle' && statusMessage && (
               <div
-                className={`flex items-start justify-between gap-3 p-3 rounded-lg text-sm ${
-                  submitStatus === 'success'
+                className={`flex items-start justify-between gap-3 p-3 rounded-lg text-sm ${submitStatus === 'success'
                     ? 'bg-green-500/20 border border-green-500/50 text-green-400'
                     : 'bg-red-500/20 border border-red-500/50 text-red-400'
-                }`}
+                  }`}
               >
                 <span>{statusMessage}</span>
                 <button
@@ -239,11 +248,10 @@ export const Contact = () => {
               disabled={isSubmitting}
               whileHover={{ scale: isSubmitting ? 1 : 1.05 }}
               whileTap={{ scale: isSubmitting ? 1 : 0.95 }}
-              className={`w-full py-3 px-6 font-semibold rounded-lg transition-all duration-300 ${
-                isSubmitting
+              className={`w-full py-3 px-6 font-semibold rounded-lg transition-all duration-300 ${isSubmitting
                   ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-purple-500 to-cyan-500 text-white hover:from-purple-600 hover:to-cyan-600'
-              }`}
+                }`}
             >
               {isSubmitting ? 'Sending...' : 'Send Message'}
             </motion.button>
