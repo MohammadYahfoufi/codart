@@ -1,11 +1,5 @@
-import { FaYoutube, FaFacebook } from 'react-icons/fa';
-import {
-  RxDiscordLogo,
-  RxGithubLogo,
-  RxInstagramLogo,
-  RxTwitterLogo,
-  RxLinkedinLogo,
-} from 'react-icons/rx';
+import { FaWhatsapp } from 'react-icons/fa';
+import { RxGithubLogo, RxInstagramLogo } from 'react-icons/rx';
 
 export const SKILL_DATA = [
   {
@@ -77,14 +71,14 @@ export const SOCIALS = [
     link: 'https://www.instagram.com/codartlb/',
   },
   {
-    name: 'Facebook',
-    icon: FaFacebook,
-    link: 'https://facebook.com',
+    name: 'GitHub',
+    icon: RxGithubLogo,
+    link: 'https://github.com/codartlb',
   },
   {
-    name: 'Twitter',
-    icon: RxTwitterLogo,
-    link: 'https://twitter.com',
+    name: 'WhatsApp',
+    icon: FaWhatsapp,
+    link: 'https://wa.me/96181714062',
   },
 ] as const;
 
@@ -249,19 +243,9 @@ export const FOOTER_DATA = [
     title: 'Community',
     data: [
       {
-        name: 'YouTube',
-        icon: FaYoutube,
-        link: 'https://youtube.com',
-      },
-      {
         name: 'GitHub',
         icon: RxGithubLogo,
-        link: 'https://github.com',
-      },
-      {
-        name: 'Discord',
-        icon: RxDiscordLogo,
-        link: 'https://discord.com',
+        link: 'https://github.com/codartlb',
       },
     ],
   },
@@ -274,14 +258,9 @@ export const FOOTER_DATA = [
         link: 'https://www.instagram.com/codartlb/',
       },
       {
-        name: 'Twitter',
-        icon: RxTwitterLogo,
-        link: 'https://twitter.com',
-      },
-      {
-        name: 'Linkedin',
-        icon: RxLinkedinLogo,
-        link: 'https://linkedin.com',
+        name: 'WhatsApp',
+        icon: FaWhatsapp,
+        link: 'https://wa.me/96181714062',
       },
     ],
   },
@@ -289,19 +268,19 @@ export const FOOTER_DATA = [
     title: 'About',
     data: [
       {
-        name: 'Become Sponsor',
+        name: 'View Services',
         icon: null,
-        link: 'https://youtube.com',
+        link: '#services',
       },
       {
-        name: 'Learning about me',
+        name: 'About Codart',
         icon: null,
-        link: 'https://example.com',
+        link: '#about-me',
       },
       {
         name: 'Contact Me',
         icon: null,
-        link: 'mailto:contact@example.com',
+        link: 'mailto:contact@codart.dev',
       },
     ],
   },
