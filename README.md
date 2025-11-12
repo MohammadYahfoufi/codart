@@ -106,6 +106,6 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📞 Contact
 
-- **Email**: contact@codart.dev
+- **Email**: info@codartlb.com
 - **GitHub**: [@MohammadYahfoufi](https://github.com/MohammadYahfoufi)
 - **Website**: [https://mohammadyahfoufi.github.io/codart](https://mohammadyahfoufi.github.io/codart)

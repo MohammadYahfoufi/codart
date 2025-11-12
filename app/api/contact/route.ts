@@ -51,7 +51,7 @@ export async function POST(req: Request) {
         USER_EMAIL: email,
         USER_NAME: name || "",
         COMPANY_NAME: "CODART",
-        SUPPORT_EMAIL: "support@codart.com",
+        SUPPORT_EMAIL: "info@codartlb.com",
         LOGO_URL: "https://codart.vercel.app/codart1.png",
         // SUBJECT: subject || "New contact form message",   // if your template uses {{ params.SUBJECT }}
       },

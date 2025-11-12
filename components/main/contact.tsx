@@ -135,7 +135,7 @@ export const Contact = () => {
               <div>
                 <p className="text-xs sm:text-sm text-gray-400">Email</p>
                 <p className="text-white font-semibold text-sm sm:text-base">
-                  contact@codart.dev
+                  info@codartlb.com
                 </p>
               </div>
             </div>
