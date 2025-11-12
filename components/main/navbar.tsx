@@ -11,9 +11,9 @@ export const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <div className="w-full max-w-full h-[65px] fixed top-0 left-0 right-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-2 sm:px-4 md:px-6 lg:px-10 overflow-hidden">
+    <nav className="w-full max-w-full h-[65px] fixed top-0 left-0 right-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-2 sm:px-4 md:px-6 lg:px-10 overflow-hidden" role="navigation" aria-label="Main navigation">
       {/* Navbar Container */}
-      <div className="w-full h-full flex items-center justify-between m-auto px-2 sm:px-3 md:px-4 max-w-full">
+      <div className="w-full h-full flex items-center justify-between m-auto px-2 sm:px-3 md:px-4 max-w-full min-w-0">
         {/* Logo + Name */}
         <Link href="#about-me" className="flex items-center flex-shrink-0">
           <Image
@@ -127,7 +127,7 @@ export const Navbar = () => {
             
             {/* Mobile Menu */}
             <motion.div
-              className="absolute top-[65px] left-0 w-full bg-[#030014]/95 backdrop-blur-xl border-t border-[rgba(112,66,248,0.2)] p-5 flex flex-col items-center text-gray-300 md:hidden z-50"
+              className="fixed top-[65px] left-0 right-0 w-full max-w-full bg-[#030014]/95 backdrop-blur-xl border-t border-[rgba(112,66,248,0.2)] p-5 flex flex-col items-center text-gray-300 md:hidden z-50 overflow-y-auto"
               initial={{ y: -100, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               exit={{ y: -100, opacity: 0 }}
@@ -250,6 +250,6 @@ export const Navbar = () => {
           </>
         )}
       </AnimatePresence>
-    </div>
+    </nav>
   );
 };
