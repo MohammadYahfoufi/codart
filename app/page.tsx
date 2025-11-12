@@ -7,8 +7,8 @@ import { Skills } from '@/components/main/skills';
 
 export default function Home() {
   return (
-    <main className="h-full w-full">
-      <div className="flex flex-col gap-8">
+    <main className="h-full w-full max-w-full overflow-x-hidden">
+      <div className="flex flex-col gap-8 max-w-full">
         <Hero />
         <Skills />
         <Services />
