@@ -11,11 +11,11 @@ export const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 sm:px-6 lg:px-10">
+    <div className="w-full max-w-full h-[65px] fixed top-0 left-0 right-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-2 sm:px-4 md:px-6 lg:px-10 overflow-hidden">
       {/* Navbar Container */}
-      <div className="w-full h-full flex items-center justify-between m-auto px-3 sm:px-4 md:px-[10px]">
+      <div className="w-full h-full flex items-center justify-between m-auto px-2 sm:px-3 md:px-4 max-w-full">
         {/* Logo + Name */}
-        <Link href="#about-me" className="flex items-center">
+        <Link href="#about-me" className="flex items-center flex-shrink-0">
           <Image
             src="/codart1.png"
             alt="Codart Logo"
@@ -23,7 +23,7 @@ export const Navbar = () => {
             height={90}
             draggable={false}
             sizes="(max-width: 768px) 40vw, 90px"
-            className="cursor-pointer w-12 h-12 sm:w-16 sm:h-16 md:w-[90px] md:h-[90px]"
+            className="cursor-pointer w-10 h-10 sm:w-14 sm:h-14 md:w-[90px] md:h-[90px]"
           />
         </Link>
 
@@ -80,9 +80,10 @@ export const Navbar = () => {
 
         {/* Hamburger Menu */}
         <motion.button
-          className="md:hidden text-white focus:outline-none relative w-8 h-8 flex flex-col justify-center items-center"
+          className="md:hidden text-white focus:outline-none relative w-8 h-8 flex flex-col justify-center items-center flex-shrink-0 ml-2"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           whileTap={{ scale: 0.95 }}
+          aria-label="Toggle mobile menu"
         >
           <motion.span
             className="w-6 h-0.5 bg-white block absolute"
