@@ -236,11 +236,11 @@ export const PROJECTS = [
     link: 'https://shopcodart.vercel.app',
   },
   {
-    title: 'Interactive Cards Portfolio',
+    title: 'B-Up Media',
     description:
-      'Step into the extraordinary world of my professional journey through the "Interactive Cards Portfolio" - an innovative and visually captivating platform that redefines the traditional portfolio experience. Ditching the conventional static layout, this portfolio leverages interactive cards to showcase my skills, projects, and personality in an engaging and dynamic manner.',
+      'B-Up Media is a full-service marketing agency delivering data-driven brand strategies, creative storytelling, and performance campaigns for growth-focused businesses. The platform highlights targeted content production, social media management, and analytics-backed execution that help clients amplify reach, strengthen identity, and convert audiences into loyal customers.',
     image: '/projects/project-3.png',
-    link: 'https://example.com',
+    link: 'https://bup-media.vercel.app/',
   },
 ] as const;
 
