@@ -69,15 +69,30 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, messageId }, { status: 200 });
   } catch (err: any) {
-    // Brevo errors often hide under response.body or response.text
-    const detail =
-      err?.response?.text ||
-      err?.response?.body?.message ||
-      err?.message ||
-      "Unknown error";
-    console.error("Brevo send error:", detail);
+    let detail = "Unknown error";
+    if (err?.response?.text) {
+      detail = err.response.text;
+    } else if (err?.response?.body) {
+      try {
+        detail = JSON.stringify(err.response.body);
+      } catch {
+        detail = String(err.response.body);
+      }
+    } else if (err?.message) {
+      detail = err.message;
+    }
+    console.error("Brevo send error (raw):", detail);
+
+    // (Optional) log which envs are present (not values)
+    console.error("Env present:", {
+      HAS_API_KEY: !!process.env.BREVO_API_KEY,
+      HAS_SENDER: !!process.env.BREVO_SENDER_EMAIL,
+      HAS_INBOX: !!process.env.CONTACT_INBOX,
+    });
+
     return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
   }
+
 }
 
 // (Optional) reject other methods:
