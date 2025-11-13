@@ -33,14 +33,14 @@ export async function POST(req: Request) {
     }
 
     // ✨ Send the email TO YOU (owner/admin), not to the visitor
-    const ownerEmail = process.env.CONTACT_INBOX ?? process.env.BREVO_SENDER_EMAIL!;
+    const ownerEmail = process.env.CONTACT_INBOX ?? process.env.BREVO_SENDER_EMAIL ?? "info@codartlb.com";
     const ownerName = process.env.CONTACT_INBOX_NAME ?? (process.env.BREVO_SENDER_NAME || "CODART");
 
 
     const sendSmtpEmail: Brevo.SendSmtpEmail = {
       to: [{ email: ownerEmail, name: ownerName }],          // <-- you receive it
       sender: {
-        email: process.env.BREVO_SENDER_EMAIL!,              // verified sender in Brevo
+        email: process.env.BREVO_SENDER_EMAIL ?? "info@codartlb.com",              // verified sender in Brevo
         name: process.env.BREVO_SENDER_NAME || "CODART",
       },
       replyTo: { email, name: name || undefined },           // <-- hitting Reply goes to the visitor
