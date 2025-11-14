@@ -11,7 +11,7 @@ export const Navbar = () => {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
   return (
-    <div className="w-full h-[65px] fixed top-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 sm:px-6 lg:px-10">
+    <div className="w-full h-[65px] fixed top-0 left-0 right-0 shadow-lg shadow-[#2A0E61]/50 bg-[#03001427] backdrop-blur-md z-50 px-4 sm:px-6 lg:px-10">
       {/* Navbar Container */}
       <div className="w-full h-full flex items-center justify-between m-auto px-3 sm:px-4 md:px-[10px]">
         {/* Logo + Name */}

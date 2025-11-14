@@ -2,23 +2,18 @@
 
 import { motion } from 'framer-motion';
 import { slideInFromLeft, slideInFromRight } from '@/lib/motion';
-import { Canvas } from '@react-three/fiber';
-import { useGLTF, OrbitControls } from '@react-three/drei';
+import dynamic from 'next/dynamic';
 import { FormEvent, useState } from 'react';
 
-// 3D Model Component
-const PlanetModel = () => {
-  const { scene } = useGLTF('/stylized_planet.glb');
-
-  return (
-    <primitive
-      object={scene}
-      scale={[2, 2, 2]}
-      position={[0, 0, 0]}
-      rotation={[0, 0, 0]}
-    />
-  );
-};
+// Dynamically load the 3D planet (no SSR so it doesn't block navbar)
+const PlanetCanvas = dynamic(() => import('@/components/PlanetCanvas'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-[31rem] lg:h-[31rem] flex items-center justify-center">
+      <div className="w-10 h-10 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" />
+    </div>
+  ),
+});
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -88,7 +83,7 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="flex flex-col items-center justify-center py-16 sm:py-20 px-6 sm:px-8 lg:px-10"
+      className="flex flex-col items-center justify-center py-16 sm:py-20 px-6 sm:px-8 lg:px-10 overflow-x-hidden"
     >
       <motion.div
         initial="hidden"
@@ -267,30 +262,7 @@ export const Contact = () => {
           variants={slideInFromRight(0.5)}
           className="w-full lg:w-1/2 flex justify-center items-center"
         >
-          <div className="w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-[31rem] lg:h-[31rem]">
-            <Canvas
-              camera={{ position: [0, 0, 5], fov: 50 }}
-              style={{ background: 'transparent' }}
-            >
-              <ambientLight intensity={0.5} />
-              <directionalLight position={[10, 10, 5]} intensity={1} />
-              <pointLight
-                position={[-10, -10, -5]}
-                intensity={0.5}
-                color="#b49bff"
-              />
-              <PlanetModel />
-              <OrbitControls
-                enableZoom={false}
-                enablePan={false}
-                enableRotate={true}
-                minPolarAngle={Math.PI / 2}
-                maxPolarAngle={Math.PI / 2}
-                autoRotate={true}
-                autoRotateSpeed={2}
-              />
-            </Canvas>
-          </div>
+          <PlanetCanvas />
         </motion.div>
       </motion.div>
     </section>
